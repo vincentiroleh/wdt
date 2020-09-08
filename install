@@ -1,0 +1,61 @@
+#!/bin/bash
+
+############################
+#
+# Linux (deb) basic web development software installation bash script.
+#
+# Run `chmod u=rwx install` to give you executable permissions
+#
+############################
+
+
+<< 'INSTRUCTION-COMMENT'
+    This script installs the following software in a linux (deb) machine
+    - Chrome --> Web Browser
+    - Visual Studio Code --> Code text Editor
+    - NodeJs --> Runtime environment
+    - npm --> NodeJs Package Manager
+    - Git --> Version control system
+    - Postman --> API testing client
+INSTRUCTION-COMMENT
+
+hostname=$(hostname -s)
+
+# Print start status message.
+echo "Hold on tight $hostname, lets get you setup"
+date
+echo
+
+echo "Hey $USER, Updating and Upgrading $hostname"
+# Updating and upgrading
+sudo apt-get -y update && sudo apt-get -y upgrade
+
+##############################
+#
+# Installing Packages
+#
+##############################
+
+# Installing dependencies if not installed already
+sudo apt install -y software-properties-common apt-transport-https wget
+
+# Installing Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+# Installing Visual Studio Code
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt -y update && sudo apt -y install code
+
+# Installing NodeJS (distro-stable)
+sudo apt -y install nodejs && sudo apt -y install npm
+
+# Installing Git
+sudo apt -y install git-all
+
+# Installing snap and postman
+sudo apt -y install snapd && sudo snap install postman
+
+# If installation errors ever occurred
+sudo apt-get -y install -f
