@@ -59,3 +59,5 @@ sudo apt -y install snapd && sudo snap install postman
 
 # If installation errors ever occurred
 sudo apt-get -y install -f
+
+echo "Installation completed"
